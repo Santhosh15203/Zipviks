@@ -1,30 +1,27 @@
 export default function ProductCard({product}){
+    const fixedprice=Number(String(product.fixedprice).replace(/,/g,""))
+    const discount=Number(product.discount)
+    const sellingprice=Number(fixedprice-(fixedprice*discount/100)).toFixed(0)
     return(
         <>
-
-     <div className="container">
-
-         <div className="" style={{width:"280px"}}>
-            <div className="card ">
-                <img src={product.image} className="card-top-img " alt={product.name} style={{width:"250px",height:"250px"}} />
+            
+            <div className="card border border-shadow" style={{width:"280px"}}>
+                <img src={product.image} className="card-top-img " alt={product.name} style={{width: "280px",height: "250px",objectFit: "cover" }} />
                 <div className="card-body">
                     <h6>{product.name}</h6>
                     <p className="small mb-0">{product.description}</p>
                     <p className="mb-0">{product.ratings}⭐️⭐️⭐️⭐️⭐️</p>
-                    <div className="d-flex gap-2  ">
-                        <p>₹{product.sellingprice} </p>
+                    <div className="d-flex gap-2 mt-2 mb-0 ">
+                        <p className="fw-bold">₹{sellingprice} </p>
                         <p className="small text-decoration-line-through">₹{product.fixedprice}</p>
-                        <p className="text-danger"><span>{product.discount}</span>% off</p>
+                        <p className="text-danger"><span>{product.discount}</span>% off
+                        </p>
                     </div>
                     <button className="btn btn-danger">View Details</button>
                 </div>
                 
             </div>
             
-
-         </div>
-        
-     </div>
         </>
     )
 }

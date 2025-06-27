@@ -1,0 +1,14 @@
+.search::placeholder{
+  font-size: 13.5px;
+  padding: 5px;
+}
+.spin {
+  animation: spintimeline 1s linear infinite;
+  transform-origin: center;  
+}
+
+@keyframes spintimeline {
+  100% {
+    transform: rotate(360deg);
+  }
+}
