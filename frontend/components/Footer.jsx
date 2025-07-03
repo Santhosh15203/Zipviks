@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <>
-      <div style={{position:"static",bottom:0,left:0,width:"100%"}} >
+      <div style={{position:"static",bottom:0,left:0,width:"100%"}}>
 
             <div className="d-flex justify-content-around  small p-4 bg-dark " style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
           
@@ -64,7 +66,7 @@ export default function Footer() {
             </div>
             </div>
 
-            <div className="bg-dark mt-1 text-white small" style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
+            <div className="bg-dark mt-1 text-white small " style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
               
                 <ul className="list-unstyled text-center small align-items-center d-flex justify-content-around ">
                   <li>
@@ -72,7 +74,8 @@ export default function Footer() {
                     <p className="mb-0 mt-2">ZipViks Img</p>
                     <p className="small">Seller Hub</p> </a>
                     </div> </li>
-                  <li>&copy; 2026 ZipViks. All Rights Reserved</li>
+                  <li>&copy; 2026 ZipViks. All Rights Reserved. Developed by <span ><Link to={"https://santhosh15203.github.io/Portfolio/"} className="text-danger "><strong>Santhosh Moorthi</strong> </Link></span></li>
+
                   <li>
                     <div  className="d-flex gap-2"> 
                       <a href="#" className="text-decoration-none  text-white"> Privacy Policy</a>
