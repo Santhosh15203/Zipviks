@@ -65,7 +65,6 @@ export default function CardDetails({cardItems,setCardItems}) {
             <p className="text-decoration-line-through text-muted">₹{fixedprice}</p>
             <p className="text-danger">{discount}% off</p>
           </div>
-          <p>{product.quantity}</p>
           <div >
             <ul className="list-unstyled d-flex gap-3">
               <li><button className="btn btn-danger" onClick={handleDecrementQuantity} disabled={custumQuantity <=1}>-</button></li>
@@ -76,7 +75,7 @@ export default function CardDetails({cardItems,setCardItems}) {
             <button onClick={handleAddToCart} className="btn btn-success ps-5 pe-5 mt-3" disabled={product.quantity==0}>Add to cart</button>
             <hr />
             <div>
-              <p><strong>Status : </strong><span className={product.quantity>0?"text-success":"text-danger"} > {product.quantity>0 ?"' In Stock '":"' Out Of Stock '"} </span> </p>
+              <p><strong>Status : </strong><span className={product.quantity>0?"text-success":"text-danger"} > <strong>{product.quantity>0 ?"' In Stock '":"' Out Of Stock '"}</strong> </span> </p>
             </div>
             <div className=" ms-0 descripton " style={{width:"450px",wordBreak: "break-word"}}>
               <p className="lh-md"><strong >Description : </strong> {product.description}</p>  

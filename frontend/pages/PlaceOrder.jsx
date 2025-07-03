@@ -46,8 +46,8 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                         <div className="text-center mt-3">
                                             <h5>Your Cart : <span className="text-danger">{cardItems.length}</span> items</h5>
                                         </div>
-                                   
-                                        <div>
+                                        <div className="d-flex gap-2">
+                                            <div>
                                             {cardItems.map((card)=>{
                                                 if (!card || !card.product) return null;
                                                 const discount=Number(card.product.discount)
@@ -55,7 +55,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                 const sellingprice=Number(fixedprice-(fixedprice*discount/100)).toFixed(0)
                                                  
                                                 return(
-                                                    <div className="d-flex gap-4 mb-3" key={card.product._id}>
+                                                    <div className="d-flex gap-2 mb-3" key={card.product._id}>
                                                     <div>
                                                         <img src={card.product.image} alt="img" style={{width:"250px",height:"200px",objectFit:"cover"}} />
                                                     </div>
@@ -67,7 +67,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                         <p className="mb-1 text-muted">(1pc. Amt)</p>
                                                         <p><strong> ₹{sellingprice}.00</strong></p>
                                                     </div>
-                                                    <div className="d-flex flex-column align-items-center justify-content-center pt-3 " >
+                                                    <div className="ms-3 d-flex flex-column align-items-center justify-content-center pt-3 " >
                                                         <div className="mb-0 text-muted">
                                                             <p>(Add count)</p>
                                                         </div>
@@ -80,7 +80,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                         </div>
                                                         
                                                     </div>
-                                                    <div className=" d-flex flex-column align-items-center justify-content-center pt-2">
+                                                    <div className="ms-3 d-flex flex-column align-items-center justify-content-center pt-2">
                                                         <p className="mb-1 text-muted">(Total. Amt)</p>
                                                         <p className="text-success fw-bold">₹{card.custumQuantity*sellingprice}.00</p>
                                                     </div>
@@ -94,7 +94,20 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                 
                                                
                                            
+                                           </div>
+                                           <div className="border border-dark ms-5 d-flex justify-content-center text-center rounded" style={{width:"250px",height:"200px"}}>
+                                               <div>
+                                                 <p className="fw-bold mt-3 text-decoration-underline">Order Summary</p>
+                                                 <div className="mb-4">
+                                                    <p className="mb-2">Total Items : 2(Units)</p>
+                                                    <p>Total Amount : $656.645</p>
+                                                 </div>
+                                                 <Link><strong className="btn btn-success ps-5 pe-5 ">Place Order</strong></Link>
+                                               </div>
+                                           </div>
                                         </div>
+                                   
+                                        
                                 </div>
 
                             
