@@ -1,14 +1,33 @@
-const userordermodel = require("../models/userorder")
+const userordermodel = require("../models/userorder");
 
+exports.userorders = async (req, res, next) => {
+    try {
+        const {cardItems} = req.body
+        const totalAmount = cardItems.reduce((acc, card) => {
+            const discount = Number(card.product.discount)
+            const fixedprice = Number(String(card.product.fixedprice).replace(/,/g, ""))
+            const sellingprice = Number((fixedprice - (fixedprice * discount / 100)).toFixed(0))
+            const quantity = card.custumQuantity
+            return acc + (sellingprice * quantity)
+        }, 0)
+        const status="pending"
+        const offset=5.5*60*60*1000  //in ,hrsmillsec,mins,sec,
+        const creditDate=new Date(Date.now()+offset)
 
-exports.userorders=async(req,res,next)=>{
-    const orderItems=req.body
-    const totalAmount=Number(orderItems.reduce((acc,singleorderitem)=>(acc+(singleorderitem.product.price*singleorderitem.qty)),0)).toFixed(2)
-    console.log(totalAmount,'amount')
-    const status="pending"
-    const userorders=await userordermodel.create({orderItems,totalAmount,status})
-    res.json({
-        message:"user order success",
-        userorders
-    })
-}
+        const userorders = await userordermodel.create({
+            cardItems, 
+            totalAmount,
+            status,
+            creditDate
+        })
+
+        res.json({
+            message: "user order success",
+            userorders
+        })
+
+    } catch (error) {
+        console.error("Order placement error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SerachBar";
+import "../pages/Home.css";
 
 export default function Header({cardItems,setCardItems}) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg border-shadow border mb-0 bg-dark " style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
+    <div className="d-flex flex-column">
+       <nav className="navbar navbar-expand-lg d-flex flex-column border-shadow border mb-0 bg-dark " style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
         <div className="container-fluid d-flex justify-content-around align-items-center">
           <div className="text-center">
             <Link to={"/"} className="text-decoration-none">
@@ -39,9 +41,21 @@ export default function Header({cardItems,setCardItems}) {
               <p className="mb-0 small">Cart</p>
             </Link>
           </div>
-
+          
         </div>
       </nav>
+      <div className="display-container" >
+        <ul className="d-flex gap-4 text-dark list-unstyled display p-2 fw-bold">
+          <li >🚚Free Shipping on All Products!</li>
+          <li>🎉 Big Discounts Every Day!</li>
+          <li>🛒 Unstoppable Deals. Unbeatable Prices.</li>
+          <li>💥 Start Shopping Now — Before It’s Gone!</li>
+          <li>🔥 Trending Products Selling Out Fast!</li>
+
+        </ul>
+      </div>
+    </div>
+     
     </>
   );
 }

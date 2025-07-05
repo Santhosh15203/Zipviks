@@ -15,7 +15,7 @@ export default function Home() {
       .then((res) => setProducts(res.userproducts))
         setTimeout(() => {
           setLoading(false);
-        }, 500); 
+        }, 1000); 
   }, [searchparams]);
 
   return (
@@ -30,6 +30,27 @@ export default function Home() {
           </div>
         ) : products.length > 0 ? (
           <>
+          <div id="demo" className="carousel slide" data-bs-ride="carousel">
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img src="./public/slide/carouselSlide1.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              </div>
+              <div className="carousel-item active">
+                <img src="./public/slide/carouselSlide2.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              </div>
+              <div className="carousel-item active">
+                <img src="./public/slide/carouselSlide3.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              </div>
+              <div className="carousel-item active">
+                <img src="./public/slide/carouselSlide4.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              </div>
+
+            </div>
+            <div>
+              <button className="carousel-control-prev" data-bs-target="#demo" data-bs-slide="prev"><span className="carousel-control-prev-icon"></span></button>
+              <button className="carousel-control-next" data-bs-target="#demo" data-bs-slide="next"><span className="carousel-control-next-icon"></span></button>
+            </div>
+          </div>
             <h5 className="text-center mt-3">Latest Products</h5>
             {products.map((product) => (
               <div className="col-lg-3 col-md-4 col-sm-6 mt-3" key={product._id}>

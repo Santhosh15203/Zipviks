@@ -1,11 +1,10 @@
 const mongoose=require('mongoose')
-const userproductmodel = require('./userproduct')
 
 const userorderSchema=new mongoose.Schema({
-    orderItems:Array,
+    cardItems:Array,
     totalAmount:String,
     status:String,
-    creditData:Date
+    creditDate:Date
 })
 
 const userordermodel=mongoose.model('userorder',userorderSchema)

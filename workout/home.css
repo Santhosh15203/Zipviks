@@ -1,0 +1,13 @@
+.para{
+    color: rgb(4, 64, 23);
+  position: relative;
+    animation: anime 10s infinite;
+}
+@keyframes anime{
+    0%{
+        left:0%;
+    }
+    100%{
+        left: 100%;
+    }
+}

@@ -12,3 +12,23 @@
     transform: rotate(360deg);
   }
 }
+.display-container{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.display{
+  animation: display 20s linear infinite;
+  font-size: small;
+}
+.display:hover {
+  animation-play-state: paused;
+}
+@keyframes display{
+    0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

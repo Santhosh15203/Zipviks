@@ -1,9 +1,13 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 export default function PlaceOrder({cardItems,setCardItems}){
-
+    const[complete,setComplete]=useState(false)
+    const [feedback,setFeedback]=useState("")
+    const navigate=useNavigate()
     const handleIncrementQuantity=(id) => {
        const updatedItems= cardItems.map((storedcard)=>{
             if(storedcard.product._id===id){
@@ -12,7 +16,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                 }
 
             }
-            else return storedcard
+            return storedcard
         })
         setCardItems(updatedItems)
     }
@@ -25,26 +29,80 @@ export default function PlaceOrder({cardItems,setCardItems}){
                 }
 
             }
-            else return storedcard
+            return storedcard
         })
         setCardItems(updatedItems)
+    }
+
+    const handleDeleteItem=(id)=>{
+        const updatedItems=cardItems.filter((card)=>{
+            if(card.product._id!==id){
+                return true
+            }
+        })
+        setCardItems(updatedItems)
+    }
+    
+    function handlePlaceOrderItems(){
+        fetch(`${import.meta.env.VITE_REACT_APP_PRODUCT_URL}/order`,
+        {
+            method:"POST",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({cardItems})
+        })
+        .then(()=>{
+            setCardItems([]);
+            setComplete(true);
+            toast.success("Order Success!")
+        })
+    }
+    function handleSubmitFeedback(e){
+        e.preventDefault(); 
+        if(feedback===""){
+            alert("plese fill out the field")
+            return
+        }
+        toast.success("Thank for your response.")
+        navigate('/')
     }
    
     
     return(
         <>
-        {cardItems.length<=0? <>
-                                 <div className="" style={{ width: "100%", height: "347px" }}>
-                                    <div className="d-flex justify-content-center gap-1" style={{ marginTop: "10%" }}>
-                                        <span className="text-danger fs-5">Your cart item is Empty!</span>
-                                    </div>
-                                  </div>
+        {cardItems.length<=0? <> 
+                                 {!complete?
+                                      <>
+                                       <div className="" style={{ width: "100%", height: "250px" }}>
+                                            <div className="d-flex justify-content-center gap-1" style={{ marginTop: "10%" }}>
+                                                <span className="text-danger fs-5">Your cart item is Empty!</span>
+                                            </div>
+                                        </div>
+                                      </>:
+                                      <>
+                                       <div  className="d-flex flex-column align-items-center justify-content-center gap-4">
+                                          <div className="d-flex flex-column text-center gap-1 mt-5" >
+                                            <h5 className="text-success mb-0">Order Complete !</h5>
+                                            <p>Your order has been placed succesfully.</p>
+                                          </div>
+                                          <div className="mt-5 mb-3 border p-4">
+                                            <form onSubmit={handleSubmitFeedback}>
+                                                <h4>We want your opinion!😊</h4>
+                                                <p>How satisfied are you with our product.What do you like/not like about our product?*</p>
+                                                <textarea className="p-2" rows={4} cols={70} placeholder="Please fill in your answer" onChange={(e)=>{setFeedback(e.target.value)}} required></textarea><br />
+                                                <button className="btn btn-primary ">Send Feedback</button>
+                                            </form>
+                                          </div>
+                                          
+                                       </div>
+                                      
+                                      </>}
+                                
                               
                                </>:
                                <>
                                  <div className="container  mt-3 " >
                                         <div className="text-center mt-3">
-                                            <h5>Your Cart : <span className="text-danger">{cardItems.length}</span> items</h5>
+                                            <h5>Your Cart : <span className="text-success">{cardItems.length}</span> items</h5>
                                         </div>
                                         <div className="d-flex gap-2">
                                             <div>
@@ -55,7 +113,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                 const sellingprice=Number(fixedprice-(fixedprice*discount/100)).toFixed(0)
                                                  
                                                 return(
-                                                    <div className="d-flex gap-2 mb-3" key={card.product._id}>
+                                                    <div className="d-flex gap-3 mb-3" key={card.product._id}>
                                                     <div>
                                                         <img src={card.product.image} alt="img" style={{width:"250px",height:"200px",objectFit:"cover"}} />
                                                     </div>
@@ -84,9 +142,9 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                         <p className="mb-1 text-muted">(Total. Amt)</p>
                                                         <p className="text-success fw-bold">₹{card.custumQuantity*sellingprice}.00</p>
                                                     </div>
-                                                    <div className="d-flex flex-column align-items-center justify-content-center ms-5 pt-2">
-                                                        <p className="mb-1 text-muted">(Delete)</p>
-                                                        <p><Link> <i class="bi bi-trash3-fill text-danger"></i> </Link></p>
+                                                    <div className="d-flex flex-column align-items-center justify-content-center ms-3 pt-0">
+                                                        <p className="mb-0 text-muted">(Delete)</p>
+                                                        <button className="btn " onClick={()=>{handleDeleteItem(card.product._id)}}><i className="bi bi-trash3-fill text-danger"></i></button>
                                                     </div>
                                                 </div>
                                                 )
@@ -95,19 +153,23 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                                
                                            
                                            </div>
-                                           <div className="border border-dark ms-5 d-flex justify-content-center text-center rounded" style={{width:"250px",height:"200px"}}>
+                                           <div className="border border-secondary shadow ms-5 d-flex justify-content-center text-center rounded" style={{width:"250px",height:"200px"}}>
                                                <div>
-                                                 <p className="fw-bold mt-3 text-decoration-underline">Order Summary</p>
+                                                 <p className="fw-bold mt-3 text-decoration-underline mb-4">Order Summary</p>
                                                  <div className="mb-4">
-                                                    <p className="mb-2">Total Items : 2(Units)</p>
-                                                    <p>Total Amount : $656.645</p>
+                                                    <p className="mb-2">Total Items : <strong>{cardItems.reduce((acc,card)=>(acc+card.custumQuantity),0)} (Units)</strong></p>
+                                                    <p>Total Amount : <strong>₹{cardItems.reduce((acc,card)=>{
+                                                                                                            const discount=Number(card.product.discount)
+                                                                                                            const fixedprice=Number(String(card.product.fixedprice).replace(/,/g,""))
+                                                                                                            const sellingprice=Number(fixedprice-(fixedprice*discount/100)).toFixed(0)
+                                                                                                            return (acc+(card.custumQuantity*Number(sellingprice)))
+                                                                                                            },0)}.00</strong></p>
+                                                    
                                                  </div>
-                                                 <Link><strong className="btn btn-success ps-5 pe-5 ">Place Order</strong></Link>
+                                                 <button className="btn btn-success ps-5 pe-5 " onClick={handlePlaceOrderItems}>Place Order</button>
                                                </div>
                                            </div>
                                         </div>
-                                   
-                                        
                                 </div>
 
                             
