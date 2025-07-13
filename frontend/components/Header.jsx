@@ -1,14 +1,25 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SerachBar";
 import "../pages/Home.css";
+import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
 
 export default function Header({cardItems,setCardItems}) {
+  function switchModal(fromId,toId){
+    const hideModal=bootstrap.Modal.getInstance(document.getElementById(fromId)) || new bootstrap.Modal(fromId)
+    const showModal=bootstrap.Modal.getInstance(document.getElementById(toId)) || new bootstrap.Modal(toId)
+    hideModal.hide()
+    showModal.show()
+  }
+
+
   return (
     <>
     <div className="d-flex flex-column">
        <nav className="navbar navbar-expand-lg d-flex flex-column border-shadow border mb-0 bg-dark " style={{ fontFamily: "'Nunito Rounded', sans-serif" }}>
-        <div className="container-fluid d-flex justify-content-around align-items-center">
-          <div className="text-center">
+        <div className="container d-flex justify-content-around align-items-center p-0">
+
+          <div className="text-center">              {/*Logo link */}
             <Link to={"/"} className="text-decoration-none">
               <h3 className="text-white mb-0">
                 <strong style={{ fontFamily: "'Arial', 'Helvetica', sans-serif" }}>ZipViks</strong>
@@ -19,9 +30,9 @@ export default function Header({cardItems,setCardItems}) {
             </Link>
           </div>
 
-          <SearchBar/>
+          <SearchBar/>   {/*search bar */}
 
-          <div className="mt-2" style={{ marginLeft: "-100px" }}>
+          <div className="mt-2" >
             <ul className="list-unstyled d-flex gap-3 mb-0">
               <li><a href="#" className="text-decoration-none text-white small">Become a Supplier</a></li>
               <li className="text-white">|</li>
@@ -29,29 +40,71 @@ export default function Header({cardItems,setCardItems}) {
             </ul>
           </div>
 
-          <div className="d-flex gap-4 text-center mt-2 " style={{ marginLeft: "-120px" }}>
-            <a href="#" className="text-white text-decoration-none lh-sm d-flex flex-column align-items-center gap-0">
-              <i className="bi bi-person " style={{ color: "white" }}></i>
-              <p className="mb-0 small">Profile</p>
-            </a>
-            <Link to={"/cart"} className="text-white text-decoration-none lh-sm d-flex flex-column align-items-center gap-0 ">
+          <div className="d-flex gap-4 text-center mt-2 " >  {/*cart and user */}
+             <Link to={"/cart"} className="text-white text-decoration-none lh-sm d-flex flex-column align-items-center gap-0 ">
               <i className="bi bi-cart-dash " style={{ color: "white" }}>
                 <sup className="text-warning fs-6">{cardItems?cardItems.length:0}</sup>
               </i>
               <p className="mb-0 small">Cart</p>
             </Link>
+
+            <div className="text-white text-decoration-none lh-sm d-flex flex-column align-items-center gap-0">
+              <i className="bi bi-person " style={{ color: "white" }}></i>
+              <div className="dropdown text-decoration-none " style={{ cursor: "pointer" }}>
+                <p className="text-white mb-0 small dropdown-toggle " data-bs-toggle="dropdown">User </p>
+                <ul className="dropdown-menu " >
+                  <li className="dropdown-item user small" data-bs-toggle="modal" data-bs-target="#loginModal" >Login</li>
+                  <li className="dropdown-item  user small" data-bs-toggle="modal" data-bs-target="#registerModal" >Sign Up</li>
+                </ul>
+              </div>
+            </div>
+
+            <LoginForm/>
+            <div className="modal fade" id="emailModal" >
+              <div className="modal-dialog p-5 pt-0">
+                <div className="modal-content " >
+                  <div className="modal-header">
+                    <h5 className="modal-title text-dark fw-bold text-decoration-underline " >E-mail Login</h5>
+                    <button className="btn-close bg-danger" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div className="modal-body">
+                    <img src="./form/emailLogo.jpg" alt="img" style={{width:"100%",objectFit:"cover"}} />
+                    <div className="d-flex flex-column gap-2 mt-4 " >
+                      <label  className="small text-start"> E-mail Id :</label>
+                     <input type="text"  className="form-control small-placeholder" placeholder="xyz@gmail.com" required/>
+                      <label  className="small text-start"> Password :</label>
+                     <input type="password"  className="form-control small-placeholder"  placeholder="*******" required/>
+                    </div>
+                    <div className=" mt-2 gap-2 small">
+                      <p className="">or continue with <span className="text-decoration-underline text-success" onClick={()=>{switchModal('emailModal','loginModal')}} style={{cursor:"pointer"}}><i>Phone number</i></span>.</p>
+                      <p className="btn btn-success w-100 ">Login</p>
+                    </div>
+                   
+                  </div>
+                  <div className="modal-footer small">
+                    <p>Don't have an account? <span className="text-danger text-decoration-underline" data-bs-toggle="modal" data-bs-target="#registerModal" onClick={()=>{switchModal('emailModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <RegisterForm/>
+            
+            
+           
           </div>
           
         </div>
       </nav>
-      <div className="display-container" >
-        <ul className="d-flex gap-4 text-dark list-unstyled display p-2 fw-bold">
-          <li >🚚Free Shipping on All Products!</li>
-          <li>🎉 Big Discounts Every Day!</li>
+      <div className="display-container  mb-0" >
+        <ul className="d-flex gap-2  text-dark list-unstyled display pb-0 pt-1 fw-bold bg-warning">
+          <li className="ms-2">🚚Free Shipping on All Products!</li>
           <li>🛒 Unstoppable Deals. Unbeatable Prices.</li>
           <li>💥 Start Shopping Now — Before It’s Gone!</li>
           <li>🔥 Trending Products Selling Out Fast!</li>
-
+          <li>🧾 No Hidden Charges – What You See Is What You Pay!</li>
         </ul>
       </div>
     </div>

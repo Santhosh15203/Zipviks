@@ -16,7 +16,7 @@ export default function SearchBar(){
 
     return(
         <>
-          <div className="input-group" style={{ width: "650px", marginLeft: "-100px" }}>
+          <div className="input-group" style={{ width: "650px" }}>
                 <input
                 type="text"
                 id="input-search"

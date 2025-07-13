@@ -74,7 +74,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                       <>
                                        <div className="" style={{ width: "100%", height: "250px" }}>
                                             <div className="d-flex justify-content-center gap-1" style={{ marginTop: "10%" }}>
-                                                <span className="text-danger fs-5">Your cart item is Empty!</span>
+                                                <span className="text-danger fs-3 ">Your cart item is Empty!</span>
                                             </div>
                                         </div>
                                       </>:
@@ -97,7 +97,6 @@ export default function PlaceOrder({cardItems,setCardItems}){
                                       
                                       </>}
                                 
-                              
                                </>:
                                <>
                                  <div className="container  mt-3 " >

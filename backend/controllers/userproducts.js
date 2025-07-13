@@ -16,7 +16,7 @@ exports.allproduct=async(req,res,next)=>{
             })
     }catch(error){
        res.json({
-         message:"Doenot found"
+         message:"Doesnot found"
        })
     }
    

@@ -15,12 +15,12 @@ export default function Home() {
       .then((res) => setProducts(res.userproducts))
         setTimeout(() => {
           setLoading(false);
-        }, 1000); 
+        }, 1); 
   }, [searchparams]);
 
   return (
     <div className="container">
-      <div className="mt-4 row">
+      <div className="mt-0 row">
         {loading ? (
           <div className="" style={{ width: "100%", height: "347px" }}>
             <div className="d-flex justify-content-center gap-1" style={{ marginTop: "10%" }}>
@@ -30,19 +30,25 @@ export default function Home() {
           </div>
         ) : products.length > 0 ? (
           <>
-          <div id="demo" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-inner">
+          <div id="demo" className="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+             <div className="carousel-indicators">
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="0" className="active"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+          </div>
+            <div className="carousel-inner" >
               <div className="carousel-item active">
-                <img src="./public/slide/carouselSlide1.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+                <img src="/slide/carousel1.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
               </div>
-              <div className="carousel-item active">
-                <img src="./public/slide/carouselSlide2.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              <div className="carousel-item ">
+                <img src="/slide/carousel2.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
               </div>
-              <div className="carousel-item active">
-                <img src="./public/slide/carouselSlide3.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              <div className="carousel-item ">
+                <img src="/slide/carousel3.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
               </div>
-              <div className="carousel-item active">
-                <img src="./public/slide/carouselSlide4.jpg" alt="img" style={{width:"100%",height:"400px",objectFit:"cover"}} />
+              <div className="carousel-item ">
+                <img src="/slide/carousel4.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
               </div>
 
             </div>
@@ -56,6 +62,7 @@ export default function Home() {
               <div className="col-lg-3 col-md-4 col-sm-6 mt-3" key={product._id}>
                 <ProductCard product={product} />
               </div>
+
             ))}
           </>
         ) : (
