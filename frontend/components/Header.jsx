@@ -3,6 +3,7 @@ import SearchBar from "./SerachBar";
 import "../pages/Home.css";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
+import EmailForm from "./EmailForm";
 
 export default function Header({cardItems,setCardItems}) {
   function switchModal(fromId,toId){
@@ -60,36 +61,7 @@ export default function Header({cardItems,setCardItems}) {
             </div>
 
             <LoginForm/>
-            <div className="modal fade" id="emailModal" >
-              <div className="modal-dialog p-5 pt-0">
-                <div className="modal-content " >
-                  <div className="modal-header">
-                    <h5 className="modal-title text-dark fw-bold text-decoration-underline " >E-mail Login</h5>
-                    <button className="btn-close bg-danger" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div className="modal-body">
-                    <img src="./form/emailLogo.jpg" alt="img" style={{width:"100%",objectFit:"cover"}} />
-                    <div className="d-flex flex-column gap-2 mt-4 " >
-                      <label  className="small text-start"> E-mail Id :</label>
-                     <input type="text"  className="form-control small-placeholder" placeholder="xyz@gmail.com" required/>
-                      <label  className="small text-start"> Password :</label>
-                     <input type="password"  className="form-control small-placeholder"  placeholder="*******" required/>
-                    </div>
-                    <div className=" mt-2 gap-2 small">
-                      <p className="">or continue with <span className="text-decoration-underline text-success" onClick={()=>{switchModal('emailModal','loginModal')}} style={{cursor:"pointer"}}><i>Phone number</i></span>.</p>
-                      <p className="btn btn-success w-100 ">Login</p>
-                    </div>
-                   
-                  </div>
-                  <div className="modal-footer small">
-                    <p>Don't have an account? <span className="text-danger text-decoration-underline" data-bs-toggle="modal" data-bs-target="#registerModal" onClick={()=>{switchModal('emailModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
+            <EmailForm/>
             <RegisterForm/>
             
             
@@ -99,8 +71,8 @@ export default function Header({cardItems,setCardItems}) {
         </div>
       </nav>
       <div className="display-container  mb-0" >
-        <ul className="d-flex gap-2  text-dark list-unstyled display pb-0 pt-1 fw-bold bg-warning">
-          <li className="ms-2">🚚Free Shipping on All Products!</li>
+        <ul className="d-flex gap-4  text-dark list-unstyled display pb-0 pt-1 fw-bold bg-warning">
+          <li className="ms-5">🚚Free Shipping on All Products!</li>
           <li>🛒 Unstoppable Deals. Unbeatable Prices.</li>
           <li>💥 Start Shopping Now — Before It’s Gone!</li>
           <li>🔥 Trending Products Selling Out Fast!</li>

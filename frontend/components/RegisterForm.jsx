@@ -12,7 +12,6 @@ export default function RegisterForm(){
   }
 
 
-
     function resetForm() {
         setFirstname("");
         setLastname("");

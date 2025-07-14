@@ -3,6 +3,19 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
 export default function  LoginForm(){
+
+    function switchModal(fromId, toId) {
+        const fromEle = document.getElementById(fromId);
+        const toEle = document.getElementById(toId);
+
+        if (fromEle && toEle) {
+        const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEl);
+        const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEl);
+        hideModal.hide();
+        showModal.show();
+        }
+      }      
+
     const[currentmobile,setCurrentmobile]=useState("")
     const[mobilenumberfound,setmobilenumberfound]=useState("")
     const navigate=useNavigate()
