@@ -6,13 +6,8 @@ import LoginForm from "./LoginForm";
 import EmailForm from "./EmailForm";
 
 export default function Header({cardItems,setCardItems}) {
-  function switchModal(fromId,toId){
-    const hideModal=bootstrap.Modal.getInstance(document.getElementById(fromId)) || new bootstrap.Modal(fromId)
-    const showModal=bootstrap.Modal.getInstance(document.getElementById(toId)) || new bootstrap.Modal(toId)
-    hideModal.hide()
-    showModal.show()
-  }
 
+  
 
   return (
     <>
