@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 
-export default function PlaceOrder({cardItems,setCardItems}){
+export default function PlaceOrder({cardItems,setCardItems,loggedInUser}){
     const[complete,setComplete]=useState(false)
     const [feedback,setFeedback]=useState("")
     const navigate=useNavigate()
@@ -48,7 +48,7 @@ export default function PlaceOrder({cardItems,setCardItems}){
         {
             method:"POST",
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({cardItems})
+            body:JSON.stringify({cardItems,user:loggedInUser})
         })
         .then(()=>{
             setCardItems([]);

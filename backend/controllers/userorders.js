@@ -2,7 +2,7 @@ const userordermodel = require("../models/userorder");
 
 exports.userorders = async (req, res, next) => {
     try {
-        const {cardItems} = req.body
+        const {cardItems,user} = req.body
         const totalAmount = cardItems.reduce((acc, card) => {
             const discount = Number(card.product.discount)
             const fixedprice = Number(String(card.product.fixedprice).replace(/,/g, ""))
@@ -15,6 +15,7 @@ exports.userorders = async (req, res, next) => {
         const creditDate=new Date(Date.now()+offset)
 
         const userorders = await userordermodel.create({
+            user,
             cardItems, 
             totalAmount,
             status,

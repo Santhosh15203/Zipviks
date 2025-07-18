@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 
 const userorderSchema=new mongoose.Schema({
+    user:Array,
     cardItems:Array,
     totalAmount:String,
     status:String,

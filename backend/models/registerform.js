@@ -2,10 +2,10 @@ const mongoose=require("mongoose")
 
 const registerformschema=new mongoose.Schema({
     firstname:String,
-    lastname:String,
+    mobile:String,
     email:String,
     password:String,
-    mobile:String,
+    profile:String,
     gender:String,
     address:String,
     city:String,

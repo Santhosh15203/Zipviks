@@ -11,17 +11,18 @@ import PlaceOrder from "../pages/PlaceOrder"
 
 function App() {
   const[cardItems,setCardItems]= useState([])
+  const [loggedInUser,setLoggedInUser]=useState("")
 
   return (
     <>
     <ToastContainer position='top-center' theme="dark"/>
-    <Header cardItems={cardItems}/>
+    <Header cardItems={cardItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
 
     <Routes>
        <Route path="/" element={<Home/>} />
       <Route path="/search" element={<Home/>} />
       <Route path="/product/:id" element={<CardDetails cardItems={cardItems} setCardItems={setCardItems}/>} />
-      <Route path="/cart" element={<PlaceOrder cardItems={cardItems} setCardItems={setCardItems}/>} />
+      <Route path="/cart" element={<PlaceOrder cardItems={cardItems} setCardItems={setCardItems} loggedInUser={loggedInUser}/>} />
 
 
     </Routes>

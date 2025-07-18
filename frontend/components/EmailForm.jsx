@@ -2,7 +2,7 @@ import { useState } from "react"
 import {  useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-export default function EmailForm(){
+export default function EmailForm({setLoggedInUser}){
     const [currentEmail,setcurrentEmail]=useState("")
     const [currentPassword,setcurrentPassword]=useState("")
     const [emailDoesnotExist,setEmailDoesnotExist]=useState("")
@@ -29,15 +29,19 @@ export default function EmailForm(){
             if(password) setPasswordDoesnotExist("")
             else setPasswordDoesnotExist("The password doesn't match !")
 
-            if(email && password){
+            const user=userdata.find(user=>user.email==currentEmail && user.password==currentPassword)
+
+
+            if(user){
+                setLoggedInUser(user)
                  const hideModal = document.getElementById("emailModal");
                  if (hideModal) {
                     const modal = bootstrap.Modal.getInstance(hideModal) || new bootstrap.Modal(hideModal);
                     modal.hide();
                 }
-                toast.success("Successfully Login !");
-                navigate("/") ;
                 resetForm()
+                toast.success("Successfully Login !")
+                navigate("/") 
 
 
             }

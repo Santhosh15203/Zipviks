@@ -2,15 +2,15 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-export default function  LoginForm(){
+export default function  LoginForm({setLoggedInUser}){
 
     function switchModal(fromId, toId) {
         const fromEle = document.getElementById(fromId);
         const toEle = document.getElementById(toId);
 
         if (fromEle && toEle) {
-        const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEl);
-        const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEl);
+        const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEle);
+        const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEle);
         hideModal.hide();
         showModal.show();
         }
@@ -26,8 +26,9 @@ export default function  LoginForm(){
        .then(res=>res.json())
        .then((res)=>{
         const userdetails=res.userlogindata
-        const matchFound=userdetails.some(user=>user.mobile==currentmobile)
-       if(matchFound) {
+        const userFound=userdetails.find(user=>user.mobile==currentmobile)
+       if(userFound) {
+        setLoggedInUser(userFound)
         const hideModal = document.getElementById("loginModal");
           if (hideModal) {
             const modal = bootstrap.Modal.getInstance(hideModal) || new bootstrap.Modal(hideModal);

@@ -14,10 +14,10 @@ export default function RegisterForm(){
 
     function resetForm() {
         setFirstname("");
-        setLastname("");
+        setMobile("");
         setEmail("");
         setPassword("");
-        setMobile("");
+        setProfile("");
         setGender("");
         setAddress("");
         setCity("");
@@ -32,40 +32,38 @@ export default function RegisterForm(){
 
     
     const [firstname,setFirstname]=useState("")
-    const [lastname,setLastname]=useState("")
+    const [mobile,setMobile]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
-    const [mobile,setMobile]=useState("")
+    const [profile,setProfile]=useState(null)
     const [gender,setGender]=useState("")
     const [address,setAddress]=useState("")
     const [city,setCity]=useState("")
     const [state,setState]=useState("Tamil Nadu")
     const [zipcode,setZipcode]=useState("")
     const [country,setCountry]=useState("India")
- 
 
-  
+    const [showPassword, setShowPassword] = useState(false);
 
     function handleSubmitRegisterForm(e){
       e.preventDefault()
-            fetch(`${import.meta.env.VITE_REACT_APP_PRODUCT_URL}/registerform`,
-            {
-                method:"POST",
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({
-                    firstname,
-                    lastname,
-                    email,
-                    password,
-                    mobile,
-                    gender,
-                    address,
-                    state,
-                    city,
-                    zipcode,
-                    country
+      try{
+         const formData = new FormData();
+            formData.append("firstname", firstname);
+            formData.append("mobile", mobile);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("profile", profile); 
+            formData.append("gender", gender);
+            formData.append("address", address);
+            formData.append("city", city);
+            formData.append("state", state);
+            formData.append("zipcode", zipcode);
+            formData.append("country", country);
 
-                })
+            fetch(`${import.meta.env.VITE_REACT_APP_PRODUCT_URL}/registerform`, {
+              method: "POST",
+              body: formData, // no need for headers here
             })
             .then(()=>{
                 toast.success("Registeration Successful");
@@ -75,6 +73,11 @@ export default function RegisterForm(){
                 navigate('/')
                 
             })
+      }
+      catch(error){
+        console.log("error in registerForm",error)
+      }
+           
         }
     
 
@@ -85,7 +88,7 @@ export default function RegisterForm(){
                 <div className="modal-content "style={{width:"100%"}}>
                   <div className="modal-header">
                     <h5 className="modal-title text-dark fw-bold text-decoration-underline " >User Registeration</h5>
-                    <button className="btn-close bg-danger" data-bs-dismiss="modal"></button>
+                    <button className="btn-close bg-danger" data-bs-dismiss="modal" onClick={()=>{resetForm()}}></button>
                   </div>
                   
                 <form className="d-flex flex-column" onSubmit={handleSubmitRegisterForm}>  
@@ -97,25 +100,28 @@ export default function RegisterForm(){
                           {/* <label className="">First name :</label> */}
                           <input type="text"   className="form-control small-placeholder" placeholder="firstname*" value={firstname} name="firstname" onChange={(e)=>{setFirstname(e.target.value)}} required/>
                         </div>
-                        <div className="">
-                          {/* <label className="">Last name :</label> */}
-                          <input type="text" className="form-control small-placeholder " placeholder="lastname" value={lastname} name="lastname" onChange={(e)=>{setLastname(e.target.value)}} />
+                         <div className="">
+                          {/* <label className="">Mobile Number :</label> */}
+                          <input type="tel"  className="form-control small-placeholder" name="mobile" maxLength={10} value={mobile} placeholder="(+91) :*" onChange={(e)=>{setMobile(e.target.value)}} required/>
                         </div>
+                       
                       </div>
                       <div className="d-flex mt-2 mb-2 justify-content-around text-start">
                         <div className="">
                           {/* <label className="">E-mail :</label> */}
                           <input type="email"  className="form-control small-placeholder" placeholder="email*" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
                         </div>
-                        <div className="">
-                          {/* <label className="">Password :</label> */}
-                          <input type="password"  className="form-control small-placeholder" placeholder="password*" value={password} name="password" onChange={(e)=>{setPassword(e.target.value)}} required/>
-                        </div>
+            
+                        <div className="input-group">
+                                <input type={showPassword?"text":"password"}   className="form-control small-placeholder" value={password} name="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder="password*" required/>
+                                <span className="input-group-text" onClick={()=>{setShowPassword(!showPassword)}} style={{cursor:"pointer"}}><i className={`bi ${showPassword?"bi-eye":"bi-eye-slash"}`}></i> </span>
+                            </div>
                       </div>
                       <div className="d-flex mt-2 mb-2 justify-content-around text-start">
-                        <div className="">
-                          {/* <label className="">Mobile Number :</label> */}
-                          <input type="tel"  className="form-control small-placeholder" name="mobile" maxLength={10} value={mobile} placeholder="(+91) :*" onChange={(e)=>{setMobile(e.target.value)}} required/>
+                         <div className="">
+                          {/* <label className="">Last name :</label> */}
+                          <input type="file" className="form-control snall-placeholder" accept="image/*" name="profile" onChange={(e)=>{setProfile(e.target.files[0])}} required/>
+                         
                         </div>
                         <div className="d-flex flex-column w-50 ">
                           {/* <label className="ms-4">Gender :</label> */}
