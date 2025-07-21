@@ -102,7 +102,7 @@ export default function UpdateRegisterModal({loggedInUser,setLoggedInUser}){
                   <div className="modal-body small">
                     <img src="./form/updateProfileLogo.jpg" alt="img" className="rounded" style={{width:"100%",height:"170px",objectFit:"cover"}} />
                     <div className=" "> 
-                      <div className="d-flex justify-content-around mt-2 mb-2 text-start">
+                      <div className="d-flex justify-content-between mt-2 mb-2 text-start">
                         <div className="">
                           {/* <label className="">First name :</label> */}
                           <input type="text"   className="form-control small-placeholder" placeholder="firstname*" value={firstname} name="firstname" onChange={(e)=>{setFirstname(e.target.value)}} />
@@ -113,8 +113,8 @@ export default function UpdateRegisterModal({loggedInUser,setLoggedInUser}){
                         </div>
                        
                       </div>
-                      <div className="d-flex mt-2 mb-2 justify-content-around text-start">
-                        <div className="">
+                      <div className="d-flex justify-content-between mt-2 mb-2 text-start gap-4">
+                        <div className="w-100">
                           {/* <label className="">E-mail :</label> */}
                           <input type="email"  className="form-control small-placeholder" placeholder="email*" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} />
                         </div>
@@ -384,7 +384,7 @@ export default function UpdateRegisterModal({loggedInUser,setLoggedInUser}){
                   </div>
                  </form>
 
-                  <div className="modal-footer small d-flex justify-content-between">
+                  <div className="modal-footer small d-flex justify-content-end">
                     <p>Already have an account? <span className="text-primary text-decoration-underline"  onClick={()=>{switchModal('updateRegisterModal','loginModal')}} style={{cursor:"pointer"}}>Login</span></p>
                   </div>
                

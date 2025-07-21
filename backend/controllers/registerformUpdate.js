@@ -10,7 +10,6 @@ exports.registerformControllerUpdate=async(req,res,next)=>{
                     mobile,
                     email,
                     password,
-                    profile,
                     gender,
                     address,
                     city,
@@ -18,6 +17,9 @@ exports.registerformControllerUpdate=async(req,res,next)=>{
                     zipcode,
                     country,
                     };
+        if(profile){
+            updateData.profile=profile
+        }
 
         const updateUser=await registerformodal.findByIdAndUpdate(id,updateData,{new:true})
         

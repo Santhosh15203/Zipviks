@@ -4,14 +4,19 @@ import { toast } from "react-toastify"
 
 export default function RegisterForm(){
 
-   function switchModal(fromId,toId){
-    const hideModal=bootstrap.Modal.getInstance(document.getElementById(fromId)) || new bootstrap.Modal(fromId)
-    const showModal=bootstrap.Modal.getInstance(document.getElementById(toId)) || new bootstrap.Modal(toId)
-    hideModal.hide()
-    setTimeout(() => {
+    function switchModal(fromId, toId) {
+        const fromEle = document.getElementById(fromId);
+        const toEle = document.getElementById(toId);
+
+        if (fromEle && toEle) {
+        const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEle);
+        const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEle);
+        hideModal.hide();
+        setTimeout(() => {
           showModal.show()
         }, 300);
-  }
+        }
+      }    
 
 
     function resetForm() {
@@ -97,8 +102,10 @@ export default function RegisterForm(){
                 <form className="d-flex flex-column" onSubmit={handleSubmitRegisterForm}>  
                   <div className="modal-body small">
                     <img src="./form/registerLogo.jpg" alt="img" className="rounded" style={{width:"100%",height:"170px",objectFit:"cover"}} />
-                    <div className=" "> 
-                      <div className="d-flex justify-content-around mt-2 mb-2 text-start">
+
+                    <div className=""> 
+
+                      <div className="d-flex justify-content-between mt-2 mb-2 text-start">
                         <div className="">
                           {/* <label className="">First name :</label> */}
                           <input type="text"   className="form-control small-placeholder" placeholder="firstname*" value={firstname} name="firstname" onChange={(e)=>{setFirstname(e.target.value)}} required/>
@@ -109,8 +116,8 @@ export default function RegisterForm(){
                         </div>
                        
                       </div>
-                      <div className="d-flex mt-2 mb-2 justify-content-around text-start">
-                        <div className="">
+                      <div className="d-flex justify-content-between mt-2 mb-2 text-start gap-4">
+                        <div className="w-100 ">
                           {/* <label className="">E-mail :</label> */}
                           <input type="email"  className="form-control small-placeholder" placeholder="email*" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
                         </div>
@@ -118,15 +125,15 @@ export default function RegisterForm(){
                         <div className="input-group">
                                 <input type={showPassword?"text":"password"}   className="form-control small-placeholder" value={password} name="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder="password*" required/>
                                 <span className="input-group-text" onClick={()=>{setShowPassword(!showPassword)}} style={{cursor:"pointer"}}><i className={`bi ${showPassword?"bi-eye":"bi-eye-slash"}`}></i> </span>
-                            </div>
+                        </div>
                       </div>
-                      <div className="d-flex mt-2 mb-2 justify-content-around text-start">
-                         <div className="">
+                      <div className="d-flex mt-2 mb-2 justify-content-between ms-1  gap-3 text-start">
+                         <div className="w-100">
                           {/* <label className="">Last name :</label> */}
                           <input type="file" className="form-control snall-placeholder" accept="image/*" name="profile" onChange={(e)=>{setProfile(e.target.files[0])}} required/>
                          
                         </div>
-                        <div className="d-flex flex-column w-50 ">
+                        <div className="w-75">
                           {/* <label className="ms-4">Gender :</label> */}
                           <select name="gender" id="gender"  className="btn border p-2 mt-1 w-75 mx-auto small-select" value={gender} onChange={(e)=>{setGender(e.target.value)}} required>
                             <option value="">select gender</option>
