@@ -8,7 +8,9 @@ export default function RegisterForm(){
     const hideModal=bootstrap.Modal.getInstance(document.getElementById(fromId)) || new bootstrap.Modal(fromId)
     const showModal=bootstrap.Modal.getInstance(document.getElementById(toId)) || new bootstrap.Modal(toId)
     hideModal.hide()
-    showModal.show()
+    setTimeout(() => {
+          showModal.show()
+        }, 300);
   }
 
 
@@ -65,6 +67,7 @@ export default function RegisterForm(){
               method: "POST",
               body: formData, // no need for headers here
             })
+            .then(res=>res.json())
             .then(()=>{
                 toast.success("Registeration Successful");
                 resetForm()
@@ -382,7 +385,7 @@ export default function RegisterForm(){
 
                   <div className="modal-footer small d-flex justify-content-between">
                     <p className="text-decoration-underline" onClick={()=>{resetForm()}} style={{cursor:"pointer"}}  >Reset</p>
-                    <p>Already have an account? <span className="text-primary text-decoration-underline" data-bs-toggle="modal" data-bs-target="#loginModal" onClick={()=>{switchModal('registerModal','loginModal')}} style={{cursor:"pointer"}}>Login</span></p>
+                    <p>Already have an account? <span className="text-primary text-decoration-underline" onClick={()=>{switchModal('registerModal','loginModal')}} style={{cursor:"pointer"}}>Login</span></p>
                   </div>
                
 

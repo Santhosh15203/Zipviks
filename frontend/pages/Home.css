@@ -32,10 +32,7 @@
     transform: translateX(-100%);
   }
 }
-.user:hover{
-  background-color: rgb(34, 32, 32);
-  color: white;
-}
+
 .small-placeholder::placeholder{
     font-size: 14px;
 }

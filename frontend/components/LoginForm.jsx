@@ -12,7 +12,9 @@ export default function  LoginForm({setLoggedInUser}){
         const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEle);
         const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEle);
         hideModal.hide();
-        showModal.show();
+        setTimeout(() => {
+          showModal.show()
+        }, 300);
         }
       }      
 
@@ -66,7 +68,7 @@ export default function  LoginForm({setLoggedInUser}){
                         <img src="./form/loginLogo.jpg" alt="img" style={{width:"100%",objectFit:"cover"}} />
                         <div className="d-flex flex-column gap-2 mt-4" >
                             <label  className="small text-start">Enter Mobile Number :</label>
-                            <input type="text"  className="form-control small-placeholder" value={currentmobile} onChange={(e)=>{setCurrentmobile(e.target.value)}}  maxLength={10} pattern="[0-9]{10}"  placeholder="(+91)" required/>
+                            <input type="text"  className="form-control small-placeholder" value={currentmobile} onChange={(e)=>{setCurrentmobile(e.target.value)}}  maxLength={10} pattern="[0-9]{10}"  placeholder="(+91)" required autoFocus/>
                             { mobilenumberfound && <> <p className="text-danger small text-start">{mobilenumberfound}</p></>}
 
                         </div>
@@ -83,7 +85,7 @@ export default function  LoginForm({setLoggedInUser}){
 
                   <div className="modal-footer small d-flex justify-content-between">
                     <p className="text-decoration-underline" onClick={()=>{resetForm()}} style={{cursor:"pointer"}}  >Reset</p>
-                    <p>Don't have an account? <span className="text-danger text-decoration-underline" data-bs-toggle="modal" data-bs-target="#registerModal" onClick={()=>{switchModal('loginModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
+                    <p>Don't have an account? <span className="text-danger text-decoration-underline"  onClick={()=>{switchModal('loginModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
 
                   </div>
 

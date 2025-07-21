@@ -60,7 +60,9 @@ export default function EmailForm({setLoggedInUser}){
         const hideModal = bootstrap.Modal.getInstance(fromEle) || new bootstrap.Modal(fromEle);
         const showModal = bootstrap.Modal.getInstance(toEle) || new bootstrap.Modal(toEle);
         hideModal.hide();
-        showModal.show();
+        setTimeout(() => {
+          showModal.show()
+        }, 300);
         }
   }
 
@@ -98,7 +100,7 @@ export default function EmailForm({setLoggedInUser}){
                         </div>
                         <div className="modal-footer small d-flex justify-content-between">
                            <p className="text-decoration-underline" onClick={()=>{resetForm()}} style={{cursor:"pointer"}}  >Reset</p>
-                            <p>Don't have an account? <span className="text-danger text-decoration-underline" data-bs-toggle="modal" data-bs-target="#registerModal" onClick={()=>{switchModal('emailModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
+                            <p>Don't have an account? <span className="text-danger text-decoration-underline"  onClick={()=>{switchModal('emailModal','registerModal')}} style={{cursor:"pointer"}}>Sign Up</span></p>
 
                         </div>
 
