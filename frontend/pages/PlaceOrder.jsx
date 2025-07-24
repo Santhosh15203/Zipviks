@@ -16,6 +16,7 @@ export default function PlaceOrder({cardItems,setCardItems,loggedInUser}){
                 }
 
             }
+
             return storedcard
         })
         setCardItems(updatedItems)
@@ -43,18 +44,29 @@ export default function PlaceOrder({cardItems,setCardItems,loggedInUser}){
         setCardItems(updatedItems)
     }
     
-    function handlePlaceOrderItems(){
-        fetch(`${import.meta.env.VITE_REACT_APP_PRODUCT_URL}/order`,
+    function handlePlaceOrderItems(loggedInUser){
+        if(!loggedInUser){
+            toast.error("User must be login !")
+            setCardItems([])
+            navigate("/")
+            return
+        }
+        else {
+
+            fetch(`${import.meta.env.VITE_REACT_APP_PRODUCT_URL}/order`,
         {
             method:"POST",
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({cardItems,user:loggedInUser})
         })
         .then(()=>{
-            setCardItems([]);
-            setComplete(true);
-            toast.success("Order Success!")
+            // setCardItems([]);
+            // setComplete(true);
+            // toast.success("Order Success!")
+            navigate("/payment")
         })
+        }
+        
     }
     function handleSubmitFeedback(e){
         e.preventDefault(); 
@@ -165,7 +177,7 @@ export default function PlaceOrder({cardItems,setCardItems,loggedInUser}){
                                                                                                             },0)}.00</strong></p>
                                                     
                                                  </div>
-                                                 <button className="btn btn-success ps-5 pe-5 " onClick={handlePlaceOrderItems}>Place Order</button>
+                                                 <button className="btn btn-success ps-5 pe-5 " onClick={()=>{handlePlaceOrderItems(loggedInUser)}}>Proceed to Pay</button>
                                                </div>
                                            </div>
                                         </div>

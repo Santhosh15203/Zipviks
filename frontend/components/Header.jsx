@@ -73,6 +73,7 @@ export default function Header({cardItems,setCardItems,loggedInUser,setLoggedInU
                 </div> 
             
             </> }
+            
              
             <LoginForm  setLoggedInUser={setLoggedInUser}/>
             <EmailForm  setLoggedInUser={setLoggedInUser}/>

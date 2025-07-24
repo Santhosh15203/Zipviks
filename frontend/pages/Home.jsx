@@ -30,7 +30,7 @@ export default function Home() {
           </div>
         ) : products.length > 0 ? (
           <>
-          <div id="demo" className="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+          <div id="demo" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
              <div className="carousel-indicators">
               <button type="button" data-bs-target="#demo" data-bs-slide-to="0" className="active"></button>
               <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
@@ -39,16 +39,16 @@ export default function Home() {
           </div>
             <div className="carousel-inner" >
               <div className="carousel-item active">
-                <img src="/slide/carousel1.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
+                <img src="/slide/carousel1.jpg" alt="img" style={{width:"100%",height:"250px",objectFit:"cover"}} />
               </div>
               <div className="carousel-item ">
-                <img src="/slide/carousel2.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
+                <img src="/slide/carousel2.jpg" alt="img" style={{width:"100%",height:"250px",objectFit:"cover"}} />
               </div>
               <div className="carousel-item ">
-                <img src="/slide/carousel3.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
+                <img src="/slide/carousel3.jpg" alt="img" style={{width:"100%",height:"250px",objectFit:"cover"}} />
               </div>
               <div className="carousel-item ">
-                <img src="/slide/carousel4.jpg" alt="img" style={{width:"100%",height:"550px",objectFit:"cover"}} />
+                <img src="/slide/carousel4.jpg" alt="img" style={{width:"100%",height:"250px",objectFit:"cover"}} />
               </div>
 
             </div>
